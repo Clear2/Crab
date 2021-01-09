@@ -1,0 +1,52 @@
+run-mode: 'debug'
+
+http:
+  host: '0.0.0.0'
+  port: 8000
+  cert-file: ""           # 证书路径
+  key-file: ""            # 证书密钥
+  shutdown-time-out: 10   # http优雅关闭等待超时时长(单位秒)
+
+# jwt configuration
+jwt:
+  enable: true                   # 是否启用
+  signing-key: 'beeAdmin'        #
+  signing-method: 'HS512'        # 签名方式(支持：HS512/HS384/HS512)
+  expired: 7200                  # 过期时间（单位秒）
+  store: 'file'                  # 存储(支持：file/redis)
+  file-path: 'data/jwt_auth.db'  # 文件路径
+  redis-db: 10                   # redis数据库(如果存储方式是redis，则指定存储的数据库)
+  redis-prefix: 'auth_'          # 存储到redis数据库中的键名前缀
+
+
+# mysql connect configuration
+mysql:
+  debug: true
+  log-mode: true
+  username: toojoon
+  password: 'danceLaker2018@qq.com'
+  host: '121.89.167.190:6650'
+  db-name: 'bs_001'
+  config: 'charset=utf8&parseTime=True&loc=Local'
+  max-idle-conns: 10
+  max-open-conns: 10
+  max-life-time: 7200
+  enable-auto-migrate: true     # 是否启用自动映射数据库表结构
+  table-prefix: 'b_'
+
+# system configuration
+system:
+  use-multipoint: false
+  env: 'public'  # Change to "develop" to skip authentication for development mode
+  addr: 8888
+  db-type: "mysql"
+
+
+# casbin configuration
+casbin:
+  model-path: './rbac_model.conf'
+
+
+wechat:
+  appid: 'wxc63e25e3a1299556'
+  appsecret: 'fea4dc44696a0f63ebef0db9c74149bb'
