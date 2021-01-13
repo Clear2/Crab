@@ -10,6 +10,6 @@ COPY . .
 RUN go mod download
 RUN go build -o main .
 RUN ls -al
-EXPOSE 8888
+EXPOSE 8080
 ENTRYPOINT ["./main"]
 
