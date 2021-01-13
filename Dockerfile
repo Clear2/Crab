@@ -6,5 +6,10 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
 WORKDIR /app
-COPY  . .
+COPY . .
+RUN go mod download
+RUN go build -o main .
 RUN ls -al
+EXPOSE 8888
+ENTRYPOINT ["./main"]
+
