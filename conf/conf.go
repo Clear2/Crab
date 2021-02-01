@@ -9,11 +9,24 @@ import (
 
 type Config struct {
 	WeChat WeChat `mapstructure:"wechat" json:"wechat"`
+	Mysql  Mysql  `mapstructure:"mysql" json:"mysql"`
 }
 
 type WeChat struct {
 	AppId     string `mapstructure:"appid" json:"appid"`
 	AppSecret string `mapstructure:"appsecret" json:"appsecret"`
+}
+
+type Mysql struct {
+	Path         string `mapstructure:"path" json:"path" yaml:"path"`
+	Config       string `mapstructure:"config" json:"config" yaml:"config"`
+	Dbname       string `mapstructure:"db-name" json:"dbname" yaml:"db-name"`
+	Username     string `mapstructure:"username" json:"username" yaml:"username"`
+	Password     string `mapstructure:"password" json:"password" yaml:"password"`
+	MaxIdleConns int    `mapstructure:"max-idle-conns" json:"maxIdleConns" yaml:"max-idle-conns"`
+	MaxOpenConns int    `mapstructure:"max-open-conns" json:"maxOpenConns" yaml:"max-open-conns"`
+	LogMode      bool   `mapstructure:"log-mode" json:"logMode" yaml:"log-mode"`
+	LogZap       bool   `mapstructure:"log-zap" json:"logZap" yaml:"log-zap"`
 }
 
 var (

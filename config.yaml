@@ -23,16 +23,16 @@ jwt:
 mysql:
   debug: true
   log-mode: true
-  username: toojoon
-  password: 'danceLaker2018@qq.com'
-  host: '121.89.167.190:6650'
-  db-name: 'bs_001'
+  path: '121.89.167.190:3306'
+  username: 'root'
+  password: 'Li763a7689'
+  db-name: 'carb'
   config: 'charset=utf8&parseTime=True&loc=Local'
   max-idle-conns: 10
   max-open-conns: 10
   max-life-time: 7200
   enable-auto-migrate: true     # 是否启用自动映射数据库表结构
-  table-prefix: 'b_'
+  table-prefix: 'c_'
 
 # system configuration
 system:
