@@ -29,14 +29,12 @@ func InOrderRecur(root * TreeNode) {
 	InOrderRecur (root.Right)
 }
 
-// 先序遍历
+// 后序遍历
 func PosOrderRecur(root *TreeNode)  {
 	if root == nil {
 		return
 	}
-	//fmt.Printf("%d", root.Val)
 	PosOrderRecur(root.Left)
-	//fmt.Printf("%d", root.Val)
 	PosOrderRecur(root.Right)
 	fmt.Printf("%d", root.Val)
 }
@@ -47,7 +45,6 @@ func PosOrderRecur(root *TreeNode)  {
 2.打印 current
 3.先右 在左 入栈 如果有的话
 4.周而复始
-
 */
 func PreOrderUnRecur(root *TreeNode)  {
 	if root != nil {
@@ -73,7 +70,6 @@ func PreOrderUnRecur(root *TreeNode)  {
 1.弹出current 放到 收集栈 【】
 2.先压左  后压右
  */
-
 func posOrderUnRecur(root *TreeNode)  {
 	if root != nil {
 		 stack1 := []*TreeNode{}
@@ -110,6 +106,33 @@ func posOrderUnRecur(root *TreeNode)  {
 对弹出节点的右树 周而复始
 1 2 4
 */
+
+
+
+/**
+判断是否是搜索二叉树，中序遍历，看下是否是
+*/
+
+var preValue = 0
+func checkBST(head *TreeNode)  bool {
+	if head == nil {
+		return true;
+	}
+	// 如果左树不是二叉树，直接返回
+	isLeftBST := checkBST(head.Left)
+	if isLeftBST {
+		return false
+	}
+	// preValue 是否是递增的
+	if head.Val <= preValue {
+		return false
+	} else {
+		preValue = head.Val
+	}
+
+	// 判断右树
+	return checkBST(head.Right)
+}
 
 func main() {
 	root := TreeNode{Val: 1}

@@ -17,25 +17,46 @@ func (l *ListNode) Display() {
 		fmt.Printf("%v->", l.Val)
 		l = l.Next
 	}
+	fmt.Printf("\n")
 }
+/*
+ * 打印两个有序链表的公共部分
+ * 谁小谁移动，相等了打印，打印完成共同移动，直到一个结束为止
+ */
 
+
+// 反转链表 1->2 ->3 ->3
+// pre当前节点的前一个指针 ,cur记录当前节点  tmp保存当前节点的后续节点
 func reverseList(head *ListNode) *ListNode {
-	if head == nil{
+	if head == nil {
 		 return nil
 	}
-	var prev *ListNode
-	cur := head
-	//for cur != nil {
+	var cur *ListNode
+	prev := head
+	//for i:=0; i<1;i++ {
 		// 保存下一个节点
-		temp := cur.Next
-		cur.Next = prev
-		prev = cur
-		cur = temp
+		//temp := cur.Next
+		prev.Next = nil
+		prev.Display()
+		cur = prev
 		cur.Display()
+		//prev.Display()
+		//prev = cur
+		//prev.Display()
+		//cur = temp
+
 	//}
+	//prev = head
 	return nil
 }
 
+/**
+	temp := cur.Next
+	cur.Next = prev
+	prev = cur
+	cur = temp
+	cur.Display()
+ */
 func midOrUpMiddleNode(head *ListNode) *ListNode {
 	fmt.Println(head.Next == nil)
 	if head == nil || head.Next == nil || head.Next.Next == nil {
@@ -64,8 +85,8 @@ func main() {
 	a.Next.Next = &ListNode{Val: 3}
 	a.Next.Next.Next = &ListNode{Val: 4}
 	a.Next.Next.Next.Next = &ListNode{Val: 5}
-	//a.Display()
 	reverseList(&a)
+	//a.Display()
 
 	//r := midOrUpMiddleNode(&a)
 	//r.Display()

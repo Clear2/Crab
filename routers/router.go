@@ -20,6 +20,11 @@ func InitRouter() *gin.Engine {
 
 			}
 		}
+
+		mock := a.Group("/order")
+		{
+			mock.GET("/list", api.GetOrderList)
+		}
 	}
 	return r
 }
