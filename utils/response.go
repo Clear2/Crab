@@ -45,6 +45,6 @@ func ResSuccess(c *gin.Context, v interface{}) {
 }
 
 // ResError 响应错误
-func ResError(c *gin.Context, err error, status ...int) {
-	Result(c, ERROR, err.Error(), "操作失败")
+func ResError(c *gin.Context, v interface{}) {
+	Result(c, ERROR, v, "操作失败")
 }

@@ -2,32 +2,64 @@ package api
 
 import (
 	"bee.com/utils"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
+	"fmt"
 )
 
-func GetOrderList(c * gin.Context)  {
+var baseURL string= "http://172.16.7.3:20001"
+
+func MockGetLogin(c *gin.Context)  {
+	//data := map[string]string{
+	//	"password": "HUAxia123",
+	//	"username": "5628",
+	//}
+	//resp, err := utils.New("https://pzgadmin.pzgmall.com/api/login", "POST").WithRawBody(data).Request()
 	data := map[string]string{
-		"password": "HUAxia123",
-		"username": "5628",
+		"password": "pzg@123456",
+		"username": "00000777",
 	}
-
-	resp, err := utils.New("https://pzgadmin.pzgmall.com/api/login", "POST").WithRawBody(data).Request()
-
-	rs, err := utils.New("https://pzgadmin.pzgmall.com/api/8001/order/find", "POST").Request()
+	url := fmt.Sprintf("%s/api/login", baseURL)
+	resp, err := utils.New(url, "POST").WithRawBody(data).Request()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(resp)
-	c.JSON(http.StatusOK, gin.H{"data": rs})
+	utils.ResSuccess(c, resp)
+}
+func MockGetOrderList(c * gin.Context)  {
+	url := fmt.Sprintf("%s/api/8001/order/find", baseURL)
+	rs, err := utils.New(url, "POST").Request()
+	if err != nil {
+		log.Fatal(err)
+	}
+	utils.ResSuccess(c, rs)
 }
 
-/*
-"password": {
+func MockGetEmpList(c *gin.Context) {
+	url := fmt.Sprintf("%s/api/10008/securityUser/find", baseURL)
+	rs, err := utils.New(url, "POST").Request()
+	if err != nil {
+		log.Fatal(err)
+	}
+	utils.ResSuccess(c, rs)
+}
 
-		},
-		"username": {
-			"5628",
-		},*/
+func MockGetRoleList(c *gin.Context) {
+	url := fmt.Sprintf("%s/api/10009/security/findRole", baseURL)
+	rs, err := utils.New(url, "POST").Request()
+	if err != nil {
+		log.Fatal(err)
+	}
+	utils.ResSuccess(c, rs)
+}
+
+
+// pzg@123456
+func MockGetPmsList (c * gin.Context) {
+	url := fmt.Sprintf("%s/api/8001/order/find", baseURL)
+	rs, err := utils.New(url, "POST").Request()
+	if err != nil {
+		log.Fatal(err)
+	}
+	utils.ResSuccess(c, rs)
+}

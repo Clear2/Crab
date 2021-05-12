@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 type TreeNode struct {
@@ -134,6 +135,37 @@ func checkBST(head *TreeNode)  bool {
 	return checkBST(head.Right)
 }
 
+// 1.
+type Info struct {
+	MaxDistance int
+	height int
+}
+// 返回以x为头的整棵树。两个信息
+func process(x *TreeNode)  *Info{
+	if nil == x {
+		return &Info{0, 0}
+	}
+ 	leftInfo := process(x.Left)
+ 	rightInfo := process(x.Right)
+
+ 	p1 := leftInfo.MaxDistance
+ 	p2 := rightInfo.MaxDistance
+ 	p3 := leftInfo.height + 1 + rightInfo.height
+ 	var maxDistance = math.Max(float64(p3), math.Max(float64(p1), float64(p2)))
+
+ 	var height = math.Max(float64(leftInfo.height), float64(rightInfo.height)) + 1
+
+	return &Info{MaxDistance: int(maxDistance), height: int(height)}
+}
+
+func maxDeep(x *TreeNode) int {
+	if nil == x {
+		return 0
+	}
+	h := process(x.Left)
+	return h+1
+}
+
 func main() {
 	root := TreeNode{Val: 1}
 	root.Left = &TreeNode{Val: 2}
@@ -143,6 +175,9 @@ func main() {
 	root.Right = &TreeNode{Val: 3}
 	root.Right.Left = &TreeNode{Val: 6}
 	root.Right.Right = &TreeNode{Val: 7}
+
+	info := process(&root).MaxDistance
+	fmt.Println(info)
 	/**
 	 	1
 	2      3

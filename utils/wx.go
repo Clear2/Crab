@@ -1,13 +1,10 @@
 package utils
 
 import (
-	"bee.com/conf"
+	"crypto/sha1"
 	"encoding/hex"
-	"encoding/json"
-	"fmt"
 	"sort"
 	"strings"
-	"crypto/sha1"
 )
 
 func CheckSignature(signature, timestamp, nonce, token string) bool {
@@ -37,17 +34,17 @@ type AccessTokenHandle interface {
 	GetAccessToken() (accessToken string, err error)
 }
 
-func GetTokenFromServer() (resAccessToken ResAccessToken, err error) {
-	url := fmt.Sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", conf.C.WeChat.AppId, conf.C.WeChat.AppSecret)
-	var body []byte
-	body, err = HTTPGet(url)
-	if err != nil {
-		return
-	}
-	err = json.Unmarshal(body, &resAccessToken)
-	fmt.Println(resAccessToken)
-	if err != nil {
-		return
-	}
-	return resAccessToken, nil
-}
+//func GetTokenFromServer() (resAccessToken ResAccessToken, err error) {
+//	url := fmt.Sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s", conf.C.WeChat.AppId, conf.C.WeChat.AppSecret)
+//	var body []byte
+//	body, err = HTTPGet(url)
+//	if err != nil {
+//		return
+//	}
+//	err = json.Unmarshal(body, &resAccessToken)
+//	fmt.Println(resAccessToken)
+//	if err != nil {
+//		return
+//	}
+//	return resAccessToken, nil
+//}

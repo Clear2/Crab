@@ -10,13 +10,20 @@ import (
 type Config struct {
 	WeChat WeChat `mapstructure:"wechat" json:"wechat"`
 	Mysql  Mysql  `mapstructure:"mysql" json:"mysql"`
+	JWT		JWT   `mapstructure:"jwt" json:"mysql"`
 }
 
+// jwt
+type JWT struct {
+	SigningKey string `mapstructure:"signing-key" json:"signing_key" yaml:"signing-key"`
+}
+// 微信
 type WeChat struct {
 	AppId     string `mapstructure:"appid" json:"appid"`
 	AppSecret string `mapstructure:"appsecret" json:"appsecret"`
 }
 
+// mysql
 type Mysql struct {
 	Path         string `mapstructure:"path" json:"path" yaml:"path"`
 	Config       string `mapstructure:"config" json:"config" yaml:"config"`
@@ -51,7 +58,6 @@ func init() {
 				fmt.Println("config load Fail", err)
 			}
 		})
-
 		if err := v.Unmarshal(&C); err != nil {
 			fmt.Println(err)
 		}

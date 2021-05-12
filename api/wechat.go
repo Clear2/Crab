@@ -25,7 +25,6 @@ func WXCheckSignature(c *gin.Context)  {
 }
 
 func WxGetAccessTokenFromServer(c *gin.Context) {
- 	utils.GetTokenFromServer()
 }
 
 func WechatMessageReceive(c *gin.Context) {

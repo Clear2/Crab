@@ -4,17 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
 	"time"
 )
 
-
-
+// 管理cookies
 var jar, _  = cookiejar.New(nil)
 
 type Client struct {
@@ -28,16 +25,11 @@ type Client struct {
 	body        io.Reader
 }
 
-
-
-//
 func New(URL, method string) *Client {
 	client := &Client{}
 	client.url = URL
 	client.method = method
 	client.timeout = time.Second * 10
-	fmt.Println("new--->")
-
 	return client
 }
 
@@ -101,7 +93,6 @@ func (c *Client) Request() (interface{}, error) {
 	for _, cookie := range c.cookies {
 		c.request.AddCookie(&cookie)
 	}
-	fmt.Println("jar--->", jar)
 	// 设置超时时间
 	client := &http.Client{
 		Jar: jar,
@@ -124,18 +115,4 @@ func (c *Client) Request() (interface{}, error) {
 		return nil, err
 	}
 	return res, nil
-}
-
-
-func HTTPGet(uri string) ([]byte, error) {
-	response, err := http.Get(uri)
-	if err != nil {
-		return nil, err
-	}
-	defer response.Body.Close()
-	if response.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("http get error : uri=%v , statusCode=%v", uri, response.StatusCode)
-	}
-
-	return ioutil.ReadAll(response.Body)
 }

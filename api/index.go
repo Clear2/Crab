@@ -8,9 +8,8 @@ import (
 )
 
 func Index(c * gin.Context)  {
-	//conf.DB.Create(&models.Product{Code: "D42", Price: 100})
-	var product models.Product
 
+	var product models.Product
 	result := conf.DB.First(&product)
 	utils.ResSuccess(c, result)
 }
