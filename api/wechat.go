@@ -25,6 +25,15 @@ func WXCheckSignature(c *gin.Context)  {
 }
 
 func WxGetAccessTokenFromServer(c *gin.Context) {
+	const url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx5c384a6e1d773bab&secret=3b83dd39cc7e3257ab03d8c5c6774ef9"
+	//url := fmt.Sprintf("%s/api/10008/securityUser/find", baseURL)
+	rs, err := utils.New(url, "POST").Request()
+	if err != nil {
+		log.Fatal(err)
+	}
+	utils.ResSuccess(c, rs)
+	log.Println("----->>>公众号校验失败")
+
 }
 
 func WechatMessageReceive(c *gin.Context) {

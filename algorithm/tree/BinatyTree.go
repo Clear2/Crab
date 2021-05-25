@@ -113,7 +113,6 @@ func posOrderUnRecur(root *TreeNode)  {
 /**
 判断是否是搜索二叉树，中序遍历，看下是否是
 */
-
 var preValue = 0
 func checkBST(head *TreeNode)  bool {
 	if head == nil {
@@ -191,3 +190,7 @@ func main() {
 }
 // 2 6
 // 1 3
+/**
+只有右孩子没有左孩子 直接返回false
+如果遇到了第一个左右子孩子不全的，后续皆叶子节点
+ */
